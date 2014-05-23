@@ -54,21 +54,27 @@
 
 		 <h2>Multiple Choice Test</h2>
 		 <form method="POST">
-		 	<p>What is your favorite junk food?</p> 
-		 	<label for="q1a">
-		 		<input type="radio" id="q1a" name="Q1" value="Pizza">Pizza</label>
-		 	<label for="q1b">
-		 		<input type="radio" id="q1b" name="Q1" value="Fried Chicken">Fried Chicken</label>
-		 	<label for="q1c">
-		 		<input type="radio" id="q1c" name="Q1" value="Donuts">Donuts</label>
+		 	<label for="shoes">What are your favorite shoes? </label>
+			<select id="shoes" name="shoes[]" multiple>
+			    <option value="Running">Running</option>
+			    <option value="Flats">Flats</option>
+			    <option value="Heels">Heels</option>
+			</select><br>
 
-		 <p>What are your favorite colors?</p>
+		 	<p>What are your favorite colors?</p>
+
 			<label for="fc1"><input type="checkbox" id="fc1" name="fc[]" value="Red">Red</label>
 			<label for="fc2"><input type="checkbox" id="fc2" name="fc[]" value="Green">Green</label>
-			<label for="fc3"><input type="checkbox" id="fc3" name="fc[]" value="Blue">Blue</label>
-		<p>
-		        <button type="submit" name="submit">Done!</button>
-		</p>
+			<label for="fc3"><input type="checkbox" id="fc3" name="fc[]" value="Blue">Blue</label><br>
+
+			<label for="hello_kitty">Do you like Hello Kitty?</label>
+			<select id="hello_kitty" name="hello_kitty">
+				<option value="1">Yes</option>
+				<option value="0">No</option>
+			</select>
+			<p>
+			        <button type="submit" name="submit">Done!</button>
+			</p>	
 		</form>
 	</body>
 </html>
