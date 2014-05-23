@@ -50,6 +50,7 @@
 			<p>
 		        <button type="submit" name="submit">Send</button>
 		    </p>
+		 </form>
 
 		 <h2>Multiple Choice Test</h2>
 		 <form method="POST">
@@ -67,7 +68,7 @@
 			<label for="fc3"><input type="checkbox" id="fc3" name="fc[]" value="Blue">Blue</label>
 		<p>
 		        <button type="submit" name="submit">Done!</button>
-		</p>	
-
+		</p>
+		</form>
 	</body>
 </html>
