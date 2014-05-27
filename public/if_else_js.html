@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>If Else Exercise</title>
+</head>
+<body>
+	<script>
+// ignore these lines for now
+// just know that the variable 'color' will end up with a random value from the colors array
+var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+var color = colors[Math.floor(Math.random()*colors.length)];
+
+var favorite = 'red'; // todo, change this to your favorite color from the list
+	if (colors === 'red') {
+		console.log("Your color is red like a cardinal");
+	} else if (colors === 'orange') {
+		console.log("Your color is orange like a pumpkin");
+	} else if (colors === 'yellow') {
+		console.log("Your color is yellow like the sun");
+	} else if (colors === 'green') {
+		console.log("Your color is green like peas");
+	} else if (colors === "blue") {
+		console.log("Your color is blue like the sky");
+	} else {
+		console.log("I do not know anything by that color");
+	}
+
+var favorite = (color === favorite) ? "This is my favorite color" : "This color is NOT my favorite color";
+	console.log(favorite);
+	</script>
+
+</body>
+</html>
