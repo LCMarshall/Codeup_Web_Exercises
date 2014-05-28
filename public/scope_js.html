@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Functions Exercise</title>
+</head>
+<body>
+	<script>
+		
+		(function(){ 
+			var myNameIs = 'Lori';		
+			alert('Hello from ' + myNameIs);
+		})();
+
+		
+		(function(){
+			var random = Math.floor((Math.random()*100)+1);
+			var odd = (random % 2 != 0) ? (random + ' is odd'): (random + ' is not odd');
+			alert(odd);
+		})();
+
+	</script>
+
+</body>
+</html>
