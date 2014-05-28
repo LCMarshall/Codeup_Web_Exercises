@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>While Loop Exercise</title>
+</head>
+<body>
+	<script>
+	var planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune',];
+
+
+	// function for logging the planets array
+	function logPlanets() {
+	    console.log('Here is the list of planets:');
+	    console.log(planets);
+	}
+
+	console.log('Adding "The Sun" to the beginning of the planets array.');
+	// todo: Do what the log statement above says you will do.
+	planets.unshift('Sun');
+	console.log(planets);
+
+	console.log('Adding "Pluto" to the end of the planets array.');
+	// todo: Do what the log statement above says you will do.
+	planets.push('Pluto');
+	console.log(planets);
+
+	console.log('Removing "The Sun" from the beginning of the planets array.');
+	// todo: Do what the log statement above says you will do.
+	var removeItem = planets.shift();
+	console.log(removeItem);
+
+	console.log('Removing "Pluto" from the end of the planets array.');
+	// todo: Do what the log statement above says you will do.
+	var removeItem = planets.pop();
+	console.log(removeItem);
+
+	console.log('Finding and logging the index of "Earth" in the planets array.');
+	// todo: Do what the log statement above says you will do.
+	var index = planets.indexOf('Earth');
+	console.log(index);
+
+	console.log('Using splice to remove the planet after Earth.');
+	// todo: Do what the log statement above says you will do.
+	var removed = planets.splice(planets.indexOf('Earth'), 1);
+
+	console.log('Using splice to add back the planet after Earth.');
+	// todo: Do what the log statement above says you will do.
+	planets.splice(2, 0, 'Earth');
+	console.log(planets);
+
+	console.log('Reversing the order of the planets array.');
+	// todo: Do what the log statement above says you will do.
+	planets.reverse();
+	console.log(planets);
+
+	console.log('Sorting the planets array.');
+	// todo: Do what the log statement above says you will do.
+	planets.sort();
+	console.log(planets);
+
+		</script>
+</body>
+</html>
