@@ -32,6 +32,8 @@ $address_book = read_file(FILENAME);
 if (isset($_GET['id'])) {
 	unset($address_book[$_GET['id']]);
 	write_file(FILENAME, $address_book);
+	header("Location: address_book.php");
+	exit;
 }   
 
 $new_address = [];
