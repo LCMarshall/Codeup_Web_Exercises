@@ -2,11 +2,7 @@
 
 define('FILENAME', 'data/address_list.csv');
 
-$address_book = [
-    ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500', '456-657-7869'],
-    ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101', '675-789-4946'],
-    ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901', '768-870-6478']
-];
+$address_book = [];
 
 function write_file($filename, $array) {
     if (is_writable($filename)) {        
@@ -17,6 +13,26 @@ function write_file($filename, $array) {
         fclose($handle);        
     }   
 }
+
+function read_file($filename) {
+    $handle = fopen($filename, 'r');
+    $address_book = [];
+
+    while (!feof($handle)) {
+    	$row = fgetcsv($handle);
+    	if(is_array($row)) {
+    		$address_book[] = $row;
+    	}
+    }
+    fclose($handle); 
+    return $address_book;
+} 
+$address_book = read_file(FILENAME);
+
+if (isset($_GET['id'])) {
+	unset($address_book[$_GET['id']]);
+	write_file(FILENAME, $address_book);
+}   
 
 $new_address = [];
 
@@ -33,6 +49,7 @@ if (!empty($_POST['full_name']) && !empty($_POST['address']) && !empty($_POST['c
 
     array_push($address_book, $new_address);
     write_file(FILENAME, $address_book);
+    // echo "we are here";
 
 } else {
     foreach ($_POST as $key => $value) {
@@ -41,6 +58,7 @@ if (!empty($_POST['full_name']) && !empty($_POST['address']) && !empty($_POST['c
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -59,11 +77,12 @@ if (!empty($_POST['full_name']) && !empty($_POST['address']) && !empty($_POST['c
             <th>Zip</th>
             <th>Phone</th>
         </tr>
-            <? foreach ($address_book as $fields) : ?>
+            <? foreach ($address_book as $key => $fields) : ?>
             <tr>
                 <? foreach ($fields as $value): ?>
-                    <td><?= $value; ?></td>
+                    <td><?= htmlspecialchars(strip_tags($value)); ?></td>
                 <? endforeach; ?>
+                <td><a href = "?id=<?=$key;?>">Delete Contact</a></td>
             </tr>
             <?endforeach;?>	
 </table>
