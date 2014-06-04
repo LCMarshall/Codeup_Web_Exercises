@@ -4,7 +4,7 @@ define('FILENAME', 'data/address_list.csv');
 
 $address_book = [];
 
-include('address_data_store.php');
+require_once('address_data_store.php');
 
 $address_class = new AddressDataStore(FILENAME);
 
