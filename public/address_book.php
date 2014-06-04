@@ -4,34 +4,50 @@ define('FILENAME', 'data/address_list.csv');
 
 $address_book = [];
 
-function write_file($filename, $array) {
-    if (is_writable($filename)) {        
-        $handle = fopen($filename, 'w');
-        foreach ($array as $fields) {
-        	fputcsv($handle, $fields);
+class AddressDataStore {
+
+    public $filename = '';
+
+    public function __construct($filename) {
+    	$this->filename = $filename;
+    }
+
+    public function read_address_book() {
+	// Code to read file $this->filename
+        $handle = fopen($this->filename, 'r');
+	    $address_book = [];
+
+	    while (!feof($handle)) {
+	    	$row = fgetcsv($handle);
+	    	if(is_array($row)) {
+	    		$address_book[] = $row;
+	    	}
+	    }
+	    fclose($handle); 
+	    return $address_book;
+} 
+ 	// Code to write $addresses_array to file $this->filename
+      
+    public function write_address_book($addresses_array) {
+        if (is_writable($this->filename)) {        
+		    $handle = fopen($this->filename, 'w');
+		    foreach ($addresses_array as $fields) {
+		    	fputcsv($handle, $fields);
         }
         fclose($handle);        
     }   
+}        
 }
 
-function read_file($filename) {
-    $handle = fopen($filename, 'r');
-    $address_book = [];
+$address_class = new AddressDataStore(FILENAME);
 
-    while (!feof($handle)) {
-    	$row = fgetcsv($handle);
-    	if(is_array($row)) {
-    		$address_book[] = $row;
-    	}
-    }
-    fclose($handle); 
-    return $address_book;
-} 
-$address_book = read_file(FILENAME);
+$address_book = $address_class->read_address_book();
+
+// read_file(FILENAME);
 
 if (isset($_GET['id'])) {
 	unset($address_book[$_GET['id']]);
-	write_file(FILENAME, $address_book);
+	$address_class->write_address_book($address_book);
 	header("Location: address_book.php");
 	exit;
 }   
@@ -50,7 +66,7 @@ if (!empty($_POST['full_name']) && !empty($_POST['address']) && !empty($_POST['c
     $new_address['phone'] = $_POST['phone'];
 
     array_push($address_book, $new_address);
-    write_file(FILENAME, $address_book);
+    $address_class->write_address_book($address_book);
     // echo "we are here";
 
 } else {
@@ -60,7 +76,27 @@ if (!empty($_POST['full_name']) && !empty($_POST['address']) && !empty($_POST['c
         }
     }
 }
+if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0)
+{
+	// var_dump($_FILES['file1']);
+	if ($_FILES['file1']['type'] == 'text/csv') {
+	    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+	    $filename1 = basename($_FILES['file1']['name']);
+	    $saved_filename = $upload_dir . $filename1;
+	    move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 
+	    // create an AddressDataStore instance for our NEW file
+	    $add_new_file = new AddressDataStore($saved_filename);
+	    // use new instance to pull out uploaded addresses	 
+    	$newfile = $add_new_file->read_address_book();
+	    // merge address data
+	    $address_book = array_merge($address_book, $newfile);
+	    // write out address data using $address_class
+	    $address_class->write_address_book($address_book);
+	} else {
+		echo "This is not a .csv file, please try again!";
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +159,7 @@ if (!empty($_POST['full_name']) && !empty($_POST['address']) && !empty($_POST['c
 	<form method="POST" enctype="multipart/form-data">
 	    <p>
 	        <label for="file1">File to upload: </label>
-	        <input type="file" id="file1" name="file1">
+	        <input type="file"  accept=".csv" id="file1" name="file1">
 	    </p>
 	    <p>
 	        <input type="submit" value="Upload">
