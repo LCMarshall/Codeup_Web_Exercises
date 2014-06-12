@@ -1,0 +1,25 @@
+body {
+	background-image: url('/img/soft_kill.png/soft_kill.png');
+}
+
+.box {
+      width: 400px;
+      height:60px;
+      padding:10px;
+      border: 1px;
+      position: relative;
+ }
+
+h1 {
+ 	color: #6ccccc;
+ 	padding-bottom: 30px;
+ 	padding-left: 10px;
+ } 
+
+h3 {
+	color: #6ccccc;
+}
+
+#box {
+	padding-left:30px;
+}
