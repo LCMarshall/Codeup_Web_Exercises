@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Object Date</title>
+    <script src="/js/moment.js"></script>
+</head>
+<body>
+
+    <script>
+// todo:
+// Create an array of months for printing dates without Moment.js.
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+months.forEach(function(month, index) {
+    console.log("The month is: " + month)
+   });
+
+var jsBirthday = new Date(1972, 6, 20);
+
+console.log('Here is my birthday using vanilla js: ' + jsBirthday.toString());
+
+// create the date corresponding to your birthday using Moment.js.
+var momentBirthday = moment("1972-07-20").format('MMMM D, YYYY');
+
+
+// todo:
+// Log your birthday in the format: January 1, 2014 using Moment.js.
+console.log('Here is my birthday using Moment.js: ' + momentBirthday);
+       
+    </script>
+
+</body>
+</html>
+
+

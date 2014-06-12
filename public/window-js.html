@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Delayed Autosave</title>
+    <script src="/js/moment.js"></script>
+    <script src="/js/jquery.js"></script>
+</head>
+<body>
+
+    <h2>Autosaving Text Input</h2>
+    <textarea rows="10" cols="60" id="important"></textarea>
+
+    <script>
+        var timeoutId = null;
+        
+        $("#important").keyup(function() {
+            clearInterval(timeoutId);
+            timeoutId = setTimeout(function() {
+            alert('Saved!');
+            }, 5000);
+        });
+
+
+        // function save() {
+        //     alert('Saved!');
+        // }
+
+        // function autosave() {
+        //     clearInterval(timeoutId);
+        //     timeoutId = setTimeout(function() {
+        //       save();
+        //     }, 5000);
+        // }  
+
+        // var textarea = document.getElementById('important');
+        // textarea.addEventListener('keyup', autosave, false);
+
+    </script>
+
+</body>
+</html>
